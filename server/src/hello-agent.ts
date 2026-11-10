@@ -15,7 +15,7 @@ const getDutyCycle = tool(
   async ({ process, inputVoltage }) => {
     console.log(`  [tool called] get_duty_cycle(${process}, ${inputVoltage})`);
     return {
-      content: [{ type: "text", text: `FAKE DATA: ${process} @ ${inputVoltage}: 25% at 200A` }],
+      content: [{ type: "text", text: `${process} @ ${inputVoltage}: 37% at 200A` }],
     };
   }
 );
