@@ -105,3 +105,11 @@
 - Fix: `npm run dev` uses plain `tsx src/server.ts` (evaluators don't need auto-restart). Added `npm run watch -w server` for development.
 - Also: the UI now shows "Lost connection to the agent server" instead of an empty bubble when the stream fails.
 - Lesson: test clone-to-run on a clean machine (and on Windows) before submitting.
+
+
+### F6: Selection chart rendered huge and blurry (Day 5)
+- The selection chart PDF is a 1200x1200 pt page holding one low-res JPEG; the real chart is a 1195x431 band in the middle, with blank space above and below.
+- Rendering every page at 150 DPI upscaled it to 2500x2500 (blurry, mostly white), and the UI showed it overflowing the chat bubble.
+- Fix: for this page, extract the embedded JPEG and trim the white margin (1195x431). Better for the user and for the model (fewer wasted image tokens).
+- Also fixed CSS so images always fit the bubble.
+- Lesson: "render every page the same way" was too uniform; inspect odd documents individually.

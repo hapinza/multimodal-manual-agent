@@ -14,6 +14,7 @@ header {
 main {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -21,6 +22,7 @@ main {
 }
 .msg {
   max-width: 85%;
+  min-width: 0; /* let wide content (images, iframes) shrink instead of stretching the bubble */
   padding: 10px 14px;
   border-radius: 12px;
   line-height: 1.5;
@@ -34,32 +36,32 @@ main {
   align-self: flex-start;
   background: #f1f1f1;
 }
-.text {
-  .msg p:first-child {
-    margin-top: 0;
-  }
-  .msg p:last-child {
-    margin-bottom: 0;
-  }
-  figure {
-    margin: 10px 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 8px;
-  }
-  figure img {
-    width: 100%;
-    display: block;
-  }
-  figcaption {
-    font-size: 13px;
-    color: #444;
-    margin-top: 6px;
-  }
-  .page-id {
-    color: #999;
-  }
+.msg p:first-child {
+  margin-top: 0;
+}
+.msg p:last-child {
+  margin-bottom: 0;
+}
+figure {
+  margin: 10px 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+}
+figure img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+figcaption {
+  font-size: 13px;
+  color: #444;
+  margin-top: 6px;
+}
+.page-id {
+  color: #999;
 }
 .pages {
   font-size: 12px;
@@ -77,8 +79,6 @@ input {
   padding: 10px;
   font-size: 15px;
 }
-
-
 .artifact {
   margin: 10px 0;
   border: 1px solid #ddd;
@@ -95,12 +95,9 @@ input {
 }
 .artifact iframe {
   width: 100%;
-  height: 480px;
   border: 0;
   display: block;
-  resize: vertical;
 }
-
 .welcome {
   margin: auto 0;
   text-align: center;
@@ -126,4 +123,12 @@ input {
 }
 .examples button:hover {
   border-color: #2f6fed;
+}
+figure img {
+  width: 100%;
+  max-width: 100%;
+  max-height: 520px;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
