@@ -96,3 +96,12 @@
 ### D8: Generated HTML artifacts vs prebuilt components
 - Chose agent-generated HTML: anything can be drawn, and each drawing fits the user's exact process.
 - Alternative: prebuilt React widgets the agent fills with parameters (more polished, numbers from our data, but limited to what we built). Revisit if evals show artifact quality problems; a hybrid is possible.
+
+
+### F5: Server never started under `npm run dev` on Windows (Day 5)
+- Symptom: empty assistant bubble; Vite logged ECONNREFUSED for /api/chat; curl to :3001 returned 000.
+- [server] output stopped at "> tsx watch src/server.ts": the server code never ran. Running the server alone worked.
+- Cause: `tsx watch` hangs when started under `concurrently` on Windows (worked fine on Linux).
+- Fix: `npm run dev` uses plain `tsx src/server.ts` (evaluators don't need auto-restart). Added `npm run watch -w server` for development.
+- Also: the UI now shows "Lost connection to the agent server" instead of an empty bubble when the stream fails.
+- Lesson: test clone-to-run on a clean machine (and on Windows) before submitting.
