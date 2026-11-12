@@ -41,3 +41,58 @@
 
 ### D6: Structured outputs for extraction
 - First tried forced tool_choice for JSON; Opus 5.5 rejects it (400). Switched to native structured outputs (`output_config.format`), which guarantees schema-valid JSON.
+
+
+### E5: Agent v1 on the three README questions (Day 3)
+- Agent v1 = catalog (title + summary, ~10k tokens) in the system prompt + get_page tool (page text + image). Model: Sonnet 5.5.
+- All three correct, and the agent picked pages on its own (no page hints):
+  - Duty cycle: read p.19 -> 25% @ 200A on 240V. ($0.06)
+  - Flux-cored porosity: read p.37 + p.43 (both expected pages) + p.13 + p.35. Led with DCEN polarity, filtered out "MIG only" gas causes, asked a clarifying question. ($0.055)
+  - TIG polarity: read p.24 + Quick Start p.2 -> ground clamp positive. Stick contrast now cited from Quick Start p.2, so F2 is fixed. ($0.024)
+
+### F3: Citing a page it never opened (Day 3)
+- Porosity answer cited "0-15 deg drag angle (p.22)" but never called get_page on p.22. The fact came from the catalog summary.
+- The fact is correct (checked against p.22), but summaries are compressed and could be wrong, and the citation implies the page was read.
+- Options: (1) rule: summaries are for choosing pages, never for quoting; (2) allow it but mark summary-based citations. Decide during evals.
+
+
+### E7: Web chat end to end (Day 3)
+- React (Vite) chat -> Vite proxy -> Express SSE server -> agent. Pages read are shown under each answer.
+- Session resume works: "And what about the shielding gas?" (no mention of TIG) was answered for TIG, reading p.25 + p.30.
+- Honest about limits: the exact gas flow is on the Settings Chart sticker inside the welder door, which isn't in our PDFs. The agent gave the manual's 10-25 SCFH range and said it hadn't seen the chart instead of inventing a number.
+- Gaps: markdown shows as raw text; still no images or diagrams.
+
+### D7: Web architecture
+- Express + Server-Sent Events: the agent works for several seconds, so we stream progress (pages read, text) instead of waiting for the full answer.
+- Event types: tool / text / done (carries session id) / error.
+- Vite dev proxy forwards /api to the agent server, so the browser talks to one origin.
+- EventSource auto-reconnects when the stream ends, so the client closes it on done/error (otherwise the question is re-sent and billed again).
+
+
+### E8: Showing manual images (Day 4)
+- New tool show_manual_page(id, caption). The handler only acks; server.ts intercepts the tool call and sends an "image" event; the browser loads /api/pages/<id>.png.
+- TIG polarity -> showed p.24 (cable hookup diagram). Negative socket -> showed p.8 (front panel). Both exactly right.
+- Porosity -> read p.37 but [did / did not] show its defect illustration.
+- F3 persists: cited "(p.22)" twice without opening it, despite the new "(see p.X)" rule. A prompt rule alone didn't fix it.
+- Idea: crop to the figure instead of showing the whole page.
+
+
+
+### F4: Didn't show an image when it should have (Day 4)
+- "My flux-cored weld has small holes": read p.37 (which has porosity bead illustrations) but never called show_manual_page.
+- The system prompt explicitly lists "weld defect examples" as a reason to show a page. The rule wasn't strong enough.
+
+
+### E9: Artifacts (Day 4)
+- New tool render_artifact(title, html). Server forwards the HTML; the browser runs it in an iframe with sandbox="allow-scripts" (no same-origin) and a CSP that blocks all network access.
+- "240V MIG duty cycle calculator": slider + weld/rest bar. The manual only rates 100% @ 115A and 25% @ 200A; the agent refused to invent a curve and used 25% as the safe limit in between.
+- "Draw which cable goes where (flux-cored)": custom SVG of the socket row with colored arrows, plus the manual's own p.13 diagram, linked in the text.
+  - Bug: bottom labels clipped (SVG wider than the iframe).
+  - Minor inaccuracy: labeled the center connector "small center jack"; p.8 calls it the Wire Feed Power Cable.
+- "Porosity flowchart (flux-cored)": interactive 5-step Yes/No troubleshooter grounded in p.37 + p.43, gas checks skipped as MIG-only.
+- F3 partly improved: once said "p.22, which I didn't open here", but still cited p.15 unopened elsewhere.
+- Horizontal scrollbar inside artifacts: content overflows the iframe width.
+
+### D8: Generated HTML artifacts vs prebuilt components
+- Chose agent-generated HTML: anything can be drawn, and each drawing fits the user's exact process.
+- Alternative: prebuilt React widgets the agent fills with parameters (more polished, numbers from our data, but limited to what we built). Revisit if evals show artifact quality problems; a hybrid is possible.

@@ -33,9 +33,12 @@ export async function getPageImageBase64(id: string): Promise<string> {
   return (await readFile(`${KNOWLEDGE}pages/${id}.png`)).toString("base64");
 }
 
-// The "map" that goes into the system prompt: id + title + summary only (~10k tokens).
+// The "map" that goes into the system prompt: id + title + summary, plus figures worth showing.
 export function catalogForPrompt(): string {
-  return Object.values(catalog)
-    .map((e) => `[${e.id}] (${e.section}) ${e.title}\n${e.summary}`)
-    .join("\n\n");
-}
+    return Object.values(catalog)
+      .map((e) => {
+        const figures = e.figures.filter((f) => f.worth_showing).map((f) => `  - figure: ${f.description}`);
+        return [`[${e.id}] (${e.section}) ${e.title}`, e.summary, ...figures].join("\n");
+      })
+      .join("\n\n");
+  }

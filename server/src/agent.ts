@@ -16,7 +16,39 @@ const getPage = tool(
   })
 );
 
-const manualServer = createSdkMcpServer({ name: "manual", version: "0.1.0", tools: [getPage] });
+// Shows a page image to the USER. The handler does nothing visible itself: server.ts sees this
+// tool call in the stream and tells the browser to display the page.
+const showManualPage = tool(
+    "show_manual_page",
+    "Display a page of the documentation to the user, as an image in the chat. " +
+      "Use it when a figure (diagram, photo, chart, schematic) would help more than words.",
+    {
+      id: z.enum(pageIds),
+      caption: z.string().describe("One short line telling the user what to look at in the image."),
+    },
+    async ({ id }) => ({ content: [{ type: "text", text: `Page ${id} is now displayed to the user.` }] })
+  );
+  
+  
+ // Renders an interactive widget or a custom diagram for the USER. Like show_manual_page, the handler
+// only acknowledges; server.ts forwards the HTML to the browser, which runs it in a sandboxed iframe.
+const renderArtifact = tool(
+    "render_artifact",
+    "Show the user an interactive widget or a custom diagram you write as a self-contained HTML document " +
+      "(inline CSS, inline JS, inline SVG). Examples: duty cycle calculator, troubleshooting flowchart, " +
+      "settings configurator, a drawing of which cable goes in which socket.",
+    {
+      title: z.string().describe("Short title shown above the widget."),
+      html: z.string().describe("A complete, self-contained HTML document. No external scripts, styles, fonts, or images."),
+    },
+    async ({ title }) => ({ content: [{ type: "text", text: `Artifact "${title}" is now displayed to the user.` }] })
+  );
+  
+  const manualServer = createSdkMcpServer({
+    name: "manual",
+    version: "0.1.0",
+    tools: [getPage, showManualPage, renderArtifact],
+  });
 
 const SYSTEM_PROMPT = `You are the support expert for the Vulcan OmniPro 220 multiprocess welder (MIG, Flux-Cored, TIG, Stick; 120V or 240V input).
 Your user just bought this welder and is setting it up in their garage. They are not an idiot, but they are not a professional welder either. Be friendly, concrete, and practical.
@@ -28,7 +60,12 @@ How to answer:
 - If the question depends on something the user hasn't said (process, input voltage, material, thickness), ask a short clarifying question instead of guessing. You may give the general answer briefly while asking.
 - The Selection Chart's duty cycle example (165A @ 30%) is a generic illustration, not an OmniPro 220 spec.
 - If the documentation doesn't cover something, say so.
-
+- Show, don't just tell. When the answer involves something visual (socket layout, cable hookups, wire feed parts, front panel controls, weld defect examples, charts, the wiring schematic), call show_manual_page with the most relevant page, and refer to it in your text ("see the diagram above"). The catalog lists figures worth showing. Show at most two pages per answer.
+- Draw or build when words aren't enough. Call render_artifact when the user would benefit from something interactive or a custom drawing:
+  - a calculator or configurator (duty cycle for a process/voltage/amperage, settings for process + material + thickness),
+  - a troubleshooting flowchart (yes/no questions leading to fixes),
+  - a simple SVG drawing of the machine's sockets showing which cable goes where for the user's process.
+  Every number and label in an artifact must come from pages you read with get_page; never invent specs. Keep artifacts small, clear, and readable on a laptop (light background, large text, labeled controls). Briefly say in your text what the artifact shows.
 <catalog>
 ${catalogForPrompt()}
 </catalog>`;
@@ -43,7 +80,7 @@ export function ask(prompt: string, sessionId?: string) {
         systemPrompt: SYSTEM_PROMPT,
         tools: [],
         mcpServers: { manual: manualServer },
-        allowedTools: ["mcp__manual__get_page"],
+        allowedTools: ["mcp__manual__get_page", "mcp__manual__show_manual_page", "mcp__manual__render_artifact"],
         settingSources: [],
         maxTurns: 10,
       },

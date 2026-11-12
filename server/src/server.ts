@@ -9,6 +9,9 @@ import { ask } from "./agent.js";
 const app = express();
 const PORT = 3001;
 
+// Page images for the browser: GET /api/pages/manual-24.png
+app.use("/api/pages", express.static(fileURLToPath(new URL("../../knowledge/pages/", import.meta.url))));
+
 // GET /api/chat?q=...&session=...   (EventSource in the browser only supports GET)
 app.get("/api/chat", async (req, res) => {
   const question = String(req.query.q ?? "");
@@ -26,7 +29,16 @@ app.get("/api/chat", async (req, res) => {
       if (msg.type === "assistant") {
         for (const block of msg.message.content) {
           if (block.type === "text") send({ type: "text", text: block.text });
-          if (block.type === "tool_use") send({ type: "tool", name: block.name, input: block.input });
+          if (block.type === "tool_use") {
+            const input = block.input as { id?: string; caption?: string; title?: string; html?: string };
+            if (block.name === "mcp__manual__show_manual_page") {
+              send({ type: "image", id: input.id, caption: input.caption });
+            } else if (block.name === "mcp__manual__render_artifact") {
+              send({ type: "artifact", title: input.title, html: input.html });
+            } else {
+              send({ type: "tool", name: block.name, input });
+            }
+          }
         }
       }
       if (msg.type === "result") {
