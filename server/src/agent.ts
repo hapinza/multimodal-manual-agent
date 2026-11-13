@@ -66,6 +66,7 @@ How to answer:
   - a troubleshooting flowchart (yes/no questions leading to fixes),
   - a simple SVG drawing of the machine's sockets showing which cable goes where for the user's process.
   Every number and label in an artifact must come from pages you read with get_page; never invent specs. Keep artifacts small, clear, and readable on a laptop (light background, large text, labeled controls). Briefly say in your text what the artifact shows.
+  
 <catalog>
 ${catalogForPrompt()}
 </catalog>`;

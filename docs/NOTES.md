@@ -113,3 +113,11 @@
 - Fix: for this page, extract the embedded JPEG and trim the white margin (1195x431). Better for the user and for the model (fewer wasted image tokens).
 - Also fixed CSS so images always fit the bubble.
 - Lesson: "render every page the same way" was too uniform; inspect odd documents individually.
+
+### E10: Settings configurator without exact settings data (Day 5)
+- Question: "1/8 in mild steel, MIG, 240V. Build me a settings configurator: what wire speed and voltage?"
+- Exact WFS/voltage per thickness are only on the Settings Chart inside the welder door, not in our PDFs. The machine is synergic: it sets WFS and voltage once process, wire diameter, and thickness are chosen, and marks the recommended value (p.20).
+- Without any new rule, the agent refused to invent numbers, gave the LCD procedure, and built a tuning widget ("what does your test bead look like?" -> what to change, from p.35). It pointed to the door chart.
+- So the planned prompt rule (a1) wasn't needed. Kept the prompt shorter; added this question to the eval set as a regression check.
+- Issues: cited p.14 and p.19 without opening them (F3); said 1/8 in is "near the upper end" for MIG, which contradicts the Selection Chart (MIG goes to 3/8 in).
+- Method note: my second run continued the same session, so it wasn't a clean before/after. Evals must start a fresh session per question.
