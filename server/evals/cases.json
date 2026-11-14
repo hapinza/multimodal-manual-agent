@@ -65,12 +65,12 @@
       "mustContain": ["positive"]
     },
     {
-      "id": "settings-no-invented-numbers",
-      "question": "I'm welding 1/8 inch mild steel with MIG on 240V. What exact wire speed and voltage should I use?",
-      "mustContain": ["door|Settings Chart"],
-      "mustNotMatch": [
-        "(?<![-–]\\s?)\\b\\d{2}(\\.\\d)?\\s?V\\b",
-        "(?<![-–]\\s?)\\b\\d{2,3}\\s?(IPM|in/min|inches per minute)"
-      ]
-    }
+        "id": "settings-no-invented-numbers",
+        "question": "I'm welding 1/8 inch mild steel with MIG on 240V. What exact wire speed and voltage should I use?",
+        "mustContain": ["white mark|recommended"],
+        "groundedNumbers": [
+          "\\b\\d{2}(\\.\\d)?\\s?V\\b",
+          "\\b\\d{2,3}\\s?(IPM|in/min|inches per minute)"
+        ]
+      }
   ]

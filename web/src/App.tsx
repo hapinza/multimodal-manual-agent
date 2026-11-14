@@ -37,7 +37,7 @@ export default function App() {
     setMessages((prev) => [...prev.slice(0, -1), change(prev[prev.length - 1])])
   }
   function addPart(part: Part) {
-    updateLast((m) => ({ ...m, parts: [...m.parts, part] }))
+    updateLast((m) => ({ ...m, pages: [...m.pages, ...(event.input.ids ?? [])] }))
   }
 
   function send(text: string = input) {

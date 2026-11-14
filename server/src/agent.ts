@@ -5,17 +5,21 @@ import { catalog, pageIds, getPageText, getPageImageBase64, catalogForPrompt } f
 
 const getPage = tool(
   "get_page",
-  "Fetch one page of the Vulcan OmniPro 220 documentation: its extracted text plus the page image. " +
-    "Use a page id from the catalog (e.g. manual-24). Call this before stating any machine-specific fact.",
-  { id: z.enum(pageIds) },
-  async ({ id }) => ({
-    content: [
-      { type: "text", text: `Page ${id}: ${catalog[id].title}\n\n${getPageText(id)}` },
-      { type: "image", data: await getPageImageBase64(id), mimeType: "image/png" },
-    ],
+  "Fetch pages of the Vulcan OmniPro 220 documentation: each page's extracted text plus the page image. " +
+    "Pass one or more page ids from the catalog (e.g. [\"manual-24\", \"quickstart-02\"]). " +
+    "Open every page you plan to cite in one call. Call this before stating any machine-specific fact.",
+  { ids: z.array(z.enum(pageIds)).min(1).max(4) },
+  async ({ ids }) => ({
+    content: (
+      await Promise.all(
+        ids.map(async (id) => [
+          { type: "text" as const, text: `Page ${id}: ${catalog[id].title}\n\n${getPageText(id)}` },
+          { type: "image" as const, data: await getPageImageBase64(id), mimeType: "image/png" },
+        ])
+      )
+    ).flat(),
   })
 );
-
 // Shows a page image to the USER. The handler does nothing visible itself: server.ts sees this
 // tool call in the stream and tells the browser to display the page.
 const showManualPage = tool(
@@ -24,7 +28,10 @@ const showManualPage = tool(
       "Use it when a figure (diagram, photo, chart, schematic) would help more than words.",
     {
       id: z.enum(pageIds),
-      caption: z.string().describe("One short line telling the user what to look at in the image."),
+      caption: z
+      .string()
+      .max(140)
+      .describe("One short line telling the user what to look at in the image. Your answer goes in your text, not here."),
     },
     async ({ id }) => ({ content: [{ type: "text", text: `Page ${id} is now displayed to the user.` }] })
   );

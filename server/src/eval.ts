@@ -7,6 +7,7 @@ config({ path: fileURLToPath(new URL("../../.env", import.meta.url)) });
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { ask } from "./agent.js";
+import { getPageText } from "./knowledge.js";
 
 type Case = {
   id: string;
@@ -14,6 +15,7 @@ type Case = {
   mustRead?: string[]; // each entry: page ids separated by "|", at least one must be read
   mustContain?: string[]; // each entry: alternatives separated by "|", case-insensitive, checked in text + artifact HTML
   mustNotMatch?: string[]; // regexes that must NOT appear in the text + artifacts
+  groundedNumbers?: string[]; // regexes for numbers (e.g. volts); every match must appear on a page the agent read
   mustShow?: "image" | "artifact" | "any";
   mustAsk?: boolean; // the answer should ask the user a clarifying question
 };
@@ -21,6 +23,7 @@ type Case = {
 type Run = {
   read: string[];
   images: string[];
+  captions: string[];
   artifacts: string[];
   text: string;
   cost: number;
@@ -31,15 +34,18 @@ const EVALS = fileURLToPath(new URL("../evals/", import.meta.url));
 const cases: Case[] = JSON.parse(readFileSync(EVALS + "cases.json", "utf-8"));
 
 async function runCase(c: Case): Promise<Run> {
-  const run: Run = { read: [], images: [], artifacts: [], text: "", cost: 0, turns: 0 };
+    const run: Run = { read: [], images: [], captions: [], artifacts: [], text: "", cost: 0, turns: 0 };
   for await (const msg of ask(c.question)) { // no session id: every case starts fresh
     if (msg.type === "assistant") {
       for (const block of msg.message.content) {
         if (block.type === "text") run.text += block.text + "\n";
         if (block.type === "tool_use") {
-          const input = block.input as { id?: string; html?: string };
-          if (block.name.endsWith("get_page") && input.id) run.read.push(input.id);
-          if (block.name.endsWith("show_manual_page") && input.id) run.images.push(input.id);
+            const input = block.input as { id?: string; ids?: string[]; caption?: string; html?: string };
+            if (block.name.endsWith("get_page") && input.ids) run.read.push(...input.ids);
+            if (block.name.endsWith("show_manual_page") && input.id) {
+                run.images.push(input.id);
+                run.captions.push(input.caption ?? "");
+              }
           if (block.name.endsWith("render_artifact") && input.html) run.artifacts.push(input.html);
         }
       }
@@ -56,7 +62,7 @@ async function runCase(c: Case): Promise<Run> {
 // "(see p.22)" is allowed: that's the agreed way to point at a page known only from the catalog.
 function unopenedCitations(content: string, read: string[]): string[] {
   const cited = new Set<string>();
-  for (const m of content.matchAll(/(see\s+)?(Quick Start\s+)?p\.\s?(\d{1,2})\b/gi)) {
+  for (const m of content.matchAll(/(see\s+)?(Quick Start(?:\s+Guide)?\s*\(?\s*)?p\.\s?(\d{1,2})\b/gi)) {
     if (m[1]) continue;
     const page = m[3].padStart(2, "0");
     cited.add(m[2] ? `quickstart-${page}` : `manual-${page}`);
@@ -78,6 +84,13 @@ function check(c: Case, r: Run) {
     const hit = (r.text + r.artifacts.join("")).match(new RegExp(pattern, "i"));
     if (hit) failures.push(`should not say "${hit[0]}"`);
   }
+  const readText = r.read.map(getPageText).join("\n");
+  for (const pattern of c.groundedNumbers ?? []) {
+    for (const hit of (r.text + r.artifacts.join("")).matchAll(new RegExp(pattern, "gi"))) {
+      const number = hit[0].match(/\d+(\.\d+)?/)![0];
+      if (!readText.includes(number)) failures.push(`ungrounded number "${hit[0]}" (not on any page it read)`);
+    }
+  }
   if (c.mustShow === "image" && r.images.length === 0) failures.push("no manual image shown");
   if (c.mustShow === "artifact" && r.artifacts.length === 0) failures.push("no artifact");
   if (c.mustShow === "any" && r.images.length + r.artifacts.length === 0) failures.push("nothing visual");
@@ -87,8 +100,12 @@ function check(c: Case, r: Run) {
 }
 
 async function main() {
-  const only = process.argv.slice(2);
-  const selected = only.length ? cases.filter((c) => only.includes(c.id)) : cases;
+   // Optional "--repeat=N" runs each selected case N times (answers vary run to run).
+   const args = process.argv.slice(2);
+   const repeat = Number(args.find((a) => a.startsWith("--repeat="))?.split("=")[1] ?? 1);
+   const only = args.filter((a) => !a.startsWith("--"));
+   const picked = only.length ? cases.filter((c) => only.includes(c.id)) : cases;
+   const selected = picked.flatMap((c) => Array(repeat).fill(c) as Case[]);
   const results = [];
 
   for (const c of selected) {
