@@ -8,6 +8,7 @@ config({ path: fileURLToPath(new URL("../../.env", import.meta.url)) });
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { ask } from "./agent.js";
 import { getPageText } from "./knowledge.js";
+import { markUnopenedCitations } from "./citations.js";
 
 type Case = {
   id: string;
@@ -95,8 +96,10 @@ function check(c: Case, r: Run) {
   if (c.mustShow === "artifact" && r.artifacts.length === 0) failures.push("no artifact");
   if (c.mustShow === "any" && r.images.length + r.artifacts.length === 0) failures.push("nothing visual");
   if (c.mustAsk && !r.text.includes("?")) failures.push("didn't ask a clarifying question");
+  // F3 is measured on the model's raw text; "afterGuard" is what users see once server.ts rewrites citations.
   const unopened = unopenedCitations(r.text + "\n" + r.artifacts.join("\n"), r.read);
-  return { passed: failures.length === 0, failures, unopened };
+  const afterGuard = unopenedCitations(markUnopenedCitations(r.text, new Set(r.read)), r.read);
+  return { passed: failures.length === 0, failures, unopened, afterGuard };
 }
 
 async function main() {
@@ -123,8 +126,9 @@ async function main() {
 
   const passed = results.filter((r) => r.passed).length;
   const f3 = results.filter((r) => r.unopened.length > 0).length;
+  const f3Guarded = results.filter((r) => r.afterGuard.length > 0).length;
   const cost = results.reduce((sum, r) => sum + r.cost, 0);
-  console.log(`\n${passed}/${results.length} passed | F3 (cited unopened pages): ${f3}/${results.length} | total $${cost.toFixed(2)}`);
+  console.log(`\n${passed}/${results.length} passed | F3 raw: ${f3}/${results.length}, after citation guard: ${f3Guarded}/${results.length} | total $${cost.toFixed(2)}`);
 
   mkdirSync(EVALS + "results", { recursive: true });
   const file = `${EVALS}results/${new Date().toISOString().replace(/[:.]/g, "-")}.json`;

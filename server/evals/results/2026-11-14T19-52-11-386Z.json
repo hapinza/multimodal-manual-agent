@@ -1,0 +1,241 @@
+[
+  {
+    "id": "ambiguous-duty-cycle",
+    "question": "What's the duty cycle?",
+    "mustAsk": true,
+    "read": [
+      "manual-19",
+      "manual-29",
+      "manual-07"
+    ],
+    "images": [
+      "manual-07"
+    ],
+    "captions": [
+      "Rated duty cycles for MIG, TIG and Stick at 120V and 240V"
+    ],
+    "artifacts": [],
+    "text": "**Duty cycle** is how many minutes out of a 10-minute period the welder can put out a given current without overheating (p.19). At 40% duty cycle and 100 A, you can weld 4 minutes, then you must rest 6 minutes.\n\nHere are the OmniPro 220's ratings (p.7, p.19, p.29). The table is on the page above.\n\n| Process | 120V | 240V |\n|---|---|---|\n| **MIG / Flux-Cored** | 40% @ 100 A (4 min on, 6 off); 100% @ 75 A | 25% @ 200 A (2.5 min on, 7.5 off); 100% @ 115 A |\n| **TIG** | 40% @ 125 A (4/6); 100% @ 90 A | 30% @ 175 A (3/7); 100% @ 105 A |\n| **Stick** | 40% @ 80 A (4/6); 100% @ 60 A | 25% @ 175 A (2.5/7.5); 100% @ 100 A |\n\n- Duty cycle goes down as amperage goes up. Below the \"100%\" current listed for your process, you can weld continuously.\n- If you go over, the thermal protection shuts the welder down and shows a warning on the LCD. It restarts by itself once it cools (p.19).\n- Leave the power switch **on** while it cools so the fan keeps running. Rest the gun or electrode holder on a non-conductive, heat-proof surface, such as concrete, away from the ground clamp (p.19).\n- After it restarts, use shorter welds and longer rests (p.19).\n\nWhich process and input voltage (120V or 240V) are you planning to use? I can then give you the exact numbers for your setup.\n",
+    "cost": 0.11036560000000001,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "ambiguous-duty-cycle",
+    "question": "What's the duty cycle?",
+    "mustAsk": true,
+    "read": [
+      "manual-19",
+      "manual-29",
+      "manual-07"
+    ],
+    "images": [
+      "manual-07"
+    ],
+    "captions": [
+      "Rated Duty Cycles rows for MIG, TIG and Stick at 120V and 240V"
+    ],
+    "artifacts": [],
+    "text": "Duty cycle is how many minutes out of a 10-minute period the welder can run at a given current before it overheats (p.19). At 40% and 100 A, for example, you get 4 minutes of welding, then the welder needs at least 6 minutes of rest.\n\nHere are the OmniPro 220's ratings (p.7, p.19, p.29):\n\n| Process | 120V | 240V |\n|---|---|---|\n| **MIG / flux-cored** | 40% @ 100 A (4 min on, 6 off). 100% @ 75 A. | 25% @ 200 A (2.5 min on, 7.5 off). 100% @ 115 A. |\n| **TIG** | 40% @ 125 A. 100% @ 90 A. | 30% @ 175 A (3 min on, 7 off). 100% @ 105 A. |\n| **Stick** | 40% @ 80 A (4 min on, 6 off). 100% @ 60 A. | 25% @ 175 A (2.5 min on, 7.5 off). 100% @ 100 A. |\n\nThe table is also shown above (p.7).\n\n- **Lower current:** At or below the \"100%\" current, you can weld continuously.\n- **Overheating:** If you go over the limit, the welder shuts itself off and shows a warning screen on the LCD. It restarts on its own after it cools (p.19).\n- **While it cools:** Leave the power switch ON so the fan keeps running. Set the gun or electrode holder on a non-conductive, heat-proof surface such as a concrete slab, away from the ground clamp.\n- **After it restarts:** Use shorter welding periods and longer rests.\n\nWhich process and input voltage are you planning to use? I can then give you the exact numbers for your setup.\n",
+    "cost": 0.0482186,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "ambiguous-duty-cycle",
+    "question": "What's the duty cycle?",
+    "mustAsk": true,
+    "read": [
+      "manual-07",
+      "manual-19",
+      "manual-29"
+    ],
+    "images": [
+      "manual-19"
+    ],
+    "captions": [
+      "Rated duty cycle clock dials for 120V and 240V MIG/flux-cored"
+    ],
+    "artifacts": [],
+    "text": "**Duty cycle** is how many minutes out of a 10-minute period the welder can run at a given current before it overheats (p.19). For example, a 40% duty cycle at 100 A means 4 minutes of welding, then at least 6 minutes of rest.\n\nThe ratings depend on the process and your input voltage (p.7):\n\n| Process | 120V | 240V |\n|---|---|---|\n| **MIG / Flux-Cored** | 40% @ 100 A (4 min on, 6 min off). 100% @ 75 A. | 25% @ 200 A (2.5 min on, 7.5 min off). 100% @ 115 A. |\n| **TIG** | 40% @ 125 A. 100% @ 90 A. | 30% @ 175 A (3 min on, 7 min off). 100% @ 105 A. |\n| **Stick** | 40% @ 80 A. 100% @ 60 A. | 25% @ 175 A (2.5 min on, 7.5 min off). 100% @ 100 A. |\n\nThe TIG and Stick figures are on p.29. The diagram above shows the MIG/flux-cored dials.\n\n- **Lower current gives more weld time.** At or below the 100% figure (for example 115 A on 240V MIG), you can weld continuously.\n- **Overheating shuts the welder down.** The internal thermal protection shuts it off and shows a warning on the LCD (p.19). It restarts by itself once it cools.\n- **Leave the power switch on while it cools.** That keeps the fan running. Rest the gun or torch on a non-conductive, heat-proof surface such as concrete, away from the ground clamp.\n- **Weld in shorter periods afterward.** After it resumes, use shorter welds and longer rests to reduce wear.\n\nWhich process and input voltage (120V or 240V) are you planning to use? I can give you the exact numbers for that setup.\n",
+    "cost": 0.0486707,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "stick-polarity",
+    "question": "For stick welding, which socket does the electrode holder go in?",
+    "mustRead": [
+      "manual-27|quickstart-02"
+    ],
+    "mustContain": [
+      "positive"
+    ],
+    "read": [
+      "manual-27"
+    ],
+    "images": [
+      "manual-27"
+    ],
+    "captions": [
+      "Ground clamp in Negative (-), electrode holder in Positive (+) socket"
+    ],
+    "artifacts": [],
+    "text": "The electrode holder cable goes in the **Positive (+) socket** (p.27). This is DCEP polarity.\n\n1. Plug the **ground clamp cable** into the **Negative (–) socket**. Twist it clockwise all the way to lock it.\n2. Plug the **electrode holder cable** into the **Positive (+) socket**. Twist it clockwise all the way to lock it.\n3. Plug the power cord (120V or 240V) into the Power Input socket on the rear panel. Don't plug it into the wall yet.\n\nThe diagram above shows both cables in place. The Quick Start guide also says to leave the wire feed power cable disconnected for stick welding. I didn't open that page in this chat, so check it for the details (see Quick Start p.2).\n\nAre you running on 120V or 240V? I can give you the duty cycle and amperage limits for stick on whichever you're using.\n",
+    "cost": 0.021478499999999998,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "stick-polarity",
+    "question": "For stick welding, which socket does the electrode holder go in?",
+    "mustRead": [
+      "manual-27|quickstart-02"
+    ],
+    "mustContain": [
+      "positive"
+    ],
+    "read": [
+      "manual-27"
+    ],
+    "images": [
+      "manual-27"
+    ],
+    "captions": [
+      "Ground clamp in Negative (-), electrode holder in Positive (+)"
+    ],
+    "artifacts": [],
+    "text": "The electrode holder cable goes in the **Positive (+) socket** (p.27). This is DCEP polarity.\n\n1. Plug the **ground clamp cable** into the **Negative (–) socket**. Twist it clockwise all the way to lock it.\n2. Plug the **electrode holder cable** into the **Positive (+) socket**. Twist it clockwise all the way to lock it.\n3. Plug the power cord into the Power Input socket on the rear panel. Don't plug it into the wall yet (p.27).\n\nThe diagram above shows both cables on the lower front panel. The Quick Start guide also says to leave the wire feed power cable disconnected for stick (Quick Start p.2).\n\nAre you running this on 120V or 240V? I can walk you through the amperage settings and duty cycle for that input.\n",
+    "cost": 0.0201164,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [
+      "quickstart-02"
+    ],
+    "afterGuard": []
+  },
+  {
+    "id": "stick-polarity",
+    "question": "For stick welding, which socket does the electrode holder go in?",
+    "mustRead": [
+      "manual-27|quickstart-02"
+    ],
+    "mustContain": [
+      "positive"
+    ],
+    "read": [
+      "manual-27"
+    ],
+    "images": [
+      "manual-27"
+    ],
+    "captions": [
+      "Ground clamp in Negative (-), electrode holder in Positive (+)"
+    ],
+    "artifacts": [],
+    "text": "For stick welding, the electrode holder cable goes in the **Positive (+) socket**. Twist it clockwise all the way to lock it (p.27).\n\nThe ground clamp cable goes in the **Negative (–) socket**. Twist it clockwise to lock it too. This setup is called DCEP. The diagram above shows both cables.\n\nBefore you plug the power cord into the wall, connect the cables and plug the cord into the Power Input socket on the back. The manual warns against plugging into the wall outlet until then, to prevent accidental operation (p.27).\n\nThe LCD polarity screen also shows this hookup when you select STICK.\n",
+    "cost": 0.019511399999999998,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "feed-tension-flux",
+    "question": "How tight should I set the feed roller tension for flux-cored wire?",
+    "mustRead": [
+      "manual-15"
+    ],
+    "mustContain": [
+      "2-3|2–3|2 to 3|2 and 3"
+    ],
+    "read": [
+      "manual-15",
+      "manual-17"
+    ],
+    "images": [
+      "manual-15"
+    ],
+    "captions": [
+      "Step 20: latch the Feed Tensioner; note says 2–3 for flux-cored wire."
+    ],
+    "artifacts": [],
+    "text": "The page above shows the tensioner latched across the Idler Arm (step 20), with the 2–3 setting in the note below it.\n",
+    "cost": 0.038181,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "feed-tension-flux",
+    "question": "How tight should I set the feed roller tension for flux-cored wire?",
+    "mustRead": [
+      "manual-15"
+    ],
+    "mustContain": [
+      "2-3|2–3|2 to 3|2 and 3"
+    ],
+    "read": [
+      "manual-15",
+      "manual-17"
+    ],
+    "images": [
+      "manual-17"
+    ],
+    "captions": [
+      "Drive tension check: tighten the Feed Tensioner until the wire bends against the wood block."
+    ],
+    "artifacts": [],
+    "text": "**Set the Feed Tensioner to 2–3 for flux-cored wire.** Solid wire uses 3–5. Don't go higher on flux-cored, because too much force crushes the wire and can cause feeding problems (p.15).\n\n**To check it:**\n1. Latch the wire under the tensioner. Push the idler arm down and swing the tensioner up (p.15).\n2. With the gun pointed at a piece of wood 2–3\" away, press and hold the trigger. The wire feeds against the wood (p.17).\n3. If the wire stops instead of bending, unplug the welder. Tighten the Feed Tensioner slightly clockwise and try again (p.17).\n4. If the wire bends from the feed pressure, the tension is set correctly (p.17).\n5. Turn the power off and unplug the welder before you carry on (p.17).\n\n**Keep each test under 3 seconds.** With no arc, the wire stops feeding after 3 seconds anyway (p.17).\n\nTighten a little at a time, and stop as soon as the wire bends. That keeps you near the 2–3 range and avoids crushing the wire. The diagram above shows the setup.\n\nAlso make sure the feed roller is flipped to the right groove. Flux-cored wire uses the knurled roller, and the groove has to match your wire diameter (p.12).\n\nWhich wire diameter are you using? I can help you pick the right groove.\n",
+    "cost": 0.0355022,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [
+      "manual-12"
+    ],
+    "afterGuard": []
+  },
+  {
+    "id": "feed-tension-flux",
+    "question": "How tight should I set the feed roller tension for flux-cored wire?",
+    "mustRead": [
+      "manual-15"
+    ],
+    "mustContain": [
+      "2-3|2–3|2 to 3|2 and 3"
+    ],
+    "read": [
+      "manual-15",
+      "manual-17"
+    ],
+    "images": [],
+    "captions": [],
+    "artifacts": [],
+    "text": "Set the Feed Tensioner to **2–3** for flux-cored wire (p.15). Solid wire takes 3–5. Flux-cored wire is hollow, so too much pressure crushes it and can cause feeding problems (p.15).\n\n**How to set and check it**\n1. Latch the wire in the roller groove. Push the Idler Arm down, then swing the Feed Tensioner up so it latches across the arm (p.15). Start with the dial around 2.\n2. Take the nozzle and contact tip off. Then feed wire against a piece of wood from 2–3\" away (p.17).\n3. Keep each test under 3 seconds. With no arc, the wire stops feeding after about 3 seconds (p.17).\n4. If the wire **bends**, the tension is right. If the wire **stops** or the roller slips, unplug the welder. Tighten the tensioner clockwise a little, then test again (p.17).\n5. Once it's set, turn the power off and unplug it before you reinstall the tip and nozzle (p.17).\n\nRaise the tension in small steps and stop as soon as the wire bends. Going past that point can crush the wire.\n\nIf the wire still won't feed well at 2–3, check that the roller groove matches your wire. Flux-cored wire uses the knurled roller (p.12).\n\nWhich flux-cored wire diameter are you running? I can help you pick the right roller groove.\n",
+    "cost": 0.0305963,
+    "turns": 2,
+    "passed": true,
+    "failures": [],
+    "unopened": [
+      "manual-12"
+    ],
+    "afterGuard": []
+  }
+]

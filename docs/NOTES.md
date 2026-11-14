@@ -131,3 +131,21 @@
   `concurrently "node --import tsx server/src/server.ts" "vite web"`. Works on Windows and Linux.
 - Likely cause: nested npm workspace scripts under concurrently on Windows (not fully root-caused).
 - Enabled by paths resolved from import.meta.url, so the server runs from any working directory.
+
+
+### E11: Eval baseline and the multi-page get_page experiment (Day 6)
+- Eval: 12 cases in server/evals/cases.json, fresh session per case, code-graded (pages read, required phrases, visuals, clarifying question, F3 detector, numeric grounding).
+- Fixed two grader bugs before trusting it: "Quick Start (p.2)" was read as manual p.2; the number check flagged an honest quote of p.20's 24-gauge example. Replaced "no numbers" with numeric grounding: every volts/IPM number must appear on a page the agent read. Re-graded the saved baseline offline ($0).
+- Baseline: 12/12 pass, F3 8/12, $0.40. Unopened citations were all correct (the catalog is accurate) but the citation implied the page was read.
+- Hypothesis: the agent skips opening side pages because each page costs a round trip. Change: get_page takes up to 4 ids at once.
+- Result: F3 8/12 -> 3/12, cost $0.40 -> $0.45. Remaining hits are mostly "see p.17 for the hookup" pointers the regex can't tell apart from claims.
+- New failure F7: wrong-user-correction returned only a closing line; suspect the correction went into the image caption. Added a 140-char limit on captions (code-enforced) and caption logging; re-running with --repeat=5.
+
+### E12: Stable numbers and the citation guard (Day 6)
+- Full suite x3 (36 runs, $1.15, ~3 cents per question): 34/36 pass. Zero invented numbers (0/3), user mis-correction fixed every time (3/3).
+- F3 averaged 16/36 (44%). The earlier single-run 3/12 was lucky; single runs are noisy, so report repeats.
+- F3 was systematic and always correct: side facts quoted from catalog summaries (Quick Start p.2 for stick, p.12 roller groove, p.22 drag angle).
+- Fix (code, not prompt): server.ts tracks pages opened via get_page and, before text reaches the user, rewrites citations of unopened pages as pointers ("see p.22"). Eval reports both raw model behavior and what users see.
+  - Targeted x3: F3 raw 3/9, after guard 0/9.
+  - Known limit: opened pages are tracked per answer, so a page read in an earlier turn of the same conversation gets "see" when cited again (errs on the safe side).
+- Ambiguity: "you may answer while asking" let the agent skip the question (1/3). Rewrote as a concrete action ("end with one short clarifying question") -> 3/3.

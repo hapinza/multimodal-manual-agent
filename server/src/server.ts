@@ -2,6 +2,7 @@
 import { config } from "dotenv";
 import { fileURLToPath } from "node:url";
 config({ path: fileURLToPath(new URL("../../.env", import.meta.url)) });
+import { markUnopenedCitations } from "./citations.js";
 
 import express from "express";
 import { ask } from "./agent.js";
@@ -23,14 +24,15 @@ app.get("/api/chat", async (req, res) => {
     Connection: "keep-alive",
   });
   const send = (event: object) => res.write(`data: ${JSON.stringify(event)}\n\n`);
-
+  const opened = new Set<string>(); // pages the agent has read so far in this answer
   try {
     for await (const msg of ask(question, session)) {
       if (msg.type === "assistant") {
         for (const block of msg.message.content) {
-          if (block.type === "text") send({ type: "text", text: block.text });
+          if (block.type === "text") send({ type: "text", text: markUnopenedCitations(block.text, opened) });
           if (block.type === "tool_use") {
-            const input = block.input as { id?: string; caption?: string; title?: string; html?: string };
+            const input = block.input as { id?: string; ids?: string[]; caption?: string; title?: string; html?: string };
+            if (block.name === "mcp__manual__get_page") input.ids?.forEach((id) => opened.add(id));
             if (block.name === "mcp__manual__show_manual_page") {
               send({ type: "image", id: input.id, caption: input.caption });
             } else if (block.name === "mcp__manual__render_artifact") {
