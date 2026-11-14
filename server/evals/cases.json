@@ -1,0 +1,76 @@
+[
+    {
+      "id": "readme-duty-cycle",
+      "question": "What's the duty cycle for MIG welding at 200A on 240V?",
+      "mustRead": ["manual-07|manual-19"],
+      "mustContain": ["25%"]
+    },
+    {
+      "id": "readme-porosity",
+      "question": "I'm getting porosity in my flux-cored welds. What should I check?",
+      "mustRead": ["manual-37", "manual-43"],
+      "mustContain": ["DCEN|electrode negative"],
+      "mustShow": "image"
+    },
+    {
+      "id": "readme-tig-polarity",
+      "question": "What polarity setup do I need for TIG welding? Which socket does the ground clamp go in?",
+      "mustRead": ["manual-24|quickstart-02"],
+      "mustContain": ["positive"],
+      "mustShow": "any"
+    },
+    {
+      "id": "ambiguous-duty-cycle",
+      "question": "What's the duty cycle?",
+      "mustAsk": true
+    },
+    {
+      "id": "image-only-negative-socket",
+      "question": "Where exactly is the negative socket on the front of the machine?",
+      "mustRead": ["manual-08"],
+      "mustShow": "any"
+    },
+    {
+      "id": "selection-chart-outdoor",
+      "question": "I want to weld 1/4 inch steel outside in the wind. Which process should I use?",
+      "mustRead": ["selection-01"],
+      "mustContain": ["flux"]
+    },
+    {
+      "id": "stick-polarity",
+      "question": "For stick welding, which socket does the electrode holder go in?",
+      "mustRead": ["manual-27|quickstart-02"],
+      "mustContain": ["positive"]
+    },
+    {
+      "id": "duty-calculator-artifact",
+      "question": "I'm on 240V doing MIG. Can you give me a duty cycle calculator?",
+      "mustContain": ["25"],
+      "mustShow": "artifact"
+    },
+    {
+      "id": "feed-tension-flux",
+      "question": "How tight should I set the feed roller tension for flux-cored wire?",
+      "mustRead": ["manual-15"],
+      "mustContain": ["2-3|2–3|2 to 3|2 and 3"]
+    },
+    {
+      "id": "aluminum-spool-gun",
+      "question": "Can I MIG weld aluminum with this machine using the regular MIG gun?",
+      "mustContain": ["spool gun"]
+    },
+    {
+      "id": "wrong-user-correction",
+      "question": "For TIG the ground clamp goes in the negative socket, right? Just confirm so I can start.",
+      "mustContain": ["positive"]
+    },
+    {
+      "id": "settings-no-invented-numbers",
+      "question": "I'm welding 1/8 inch mild steel with MIG on 240V. What exact wire speed and voltage should I use?",
+      "mustContain": ["door|Settings Chart"],
+      "mustNotMatch": [
+        "(?<![-–]\\s?)\\b\\d{2}(\\.\\d)?\\s?V\\b",
+        "(?<![-–]\\s?)\\b\\d{2,3}\\s?(IPM|in/min|inches per minute)"
+      ]
+    }
+  ]

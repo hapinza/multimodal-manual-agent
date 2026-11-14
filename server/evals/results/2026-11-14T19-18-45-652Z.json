@@ -1,0 +1,43 @@
+[
+  {
+    "id": "readme-duty-cycle",
+    "question": "What's the duty cycle for MIG welding at 200A on 240V?",
+    "mustRead": [
+      "manual-07|manual-19"
+    ],
+    "mustContain": [
+      "25%"
+    ],
+    "read": [
+      "manual-19"
+    ],
+    "images": [],
+    "artifacts": [],
+    "text": "**At 240V and 200A, the MIG duty cycle is 25%** (p.19). In any 10-minute period, you can weld for 2-1/2 minutes and then the welder needs 7-1/2 minutes of rest.\n\n- **Continuous use:** At 240V you can weld at 115A with a 100% duty cycle, meaning no rest is required (p.19).\n- **If you overheat it:** The welder shuts down and shows a warning on the LCD. It restarts by itself once it cools. Leave the power switch on during cooldown so the fan keeps running. Rest the MIG gun on a non-conductive, heat-proof surface, well away from the ground clamp (p.19).\n- **On 120V:** The rating is 40% at 100A (4 minutes welding, 6 minutes resting) and 100% at 75A (p.19).\n\nThe rating plate chart on p.19 shows these figures.\n",
+    "cost": 0.08174940000000001,
+    "turns": 2,
+    "passed": true,
+    "failures": [],
+    "unopened": []
+  },
+  {
+    "id": "ambiguous-duty-cycle",
+    "question": "What's the duty cycle?",
+    "mustAsk": true,
+    "read": [
+      "manual-07",
+      "manual-19",
+      "manual-29"
+    ],
+    "images": [
+      "manual-19"
+    ],
+    "artifacts": [],
+    "text": "Duty cycle is how many minutes out of a 10-minute period the welder can run at a given current without overheating. A 40% duty cycle at 100A means 4 minutes of welding, then at least 6 minutes of rest (p.19). The numbers depend on process and input voltage.\n\n| Process | 120V | 240V |\n|---|---|---|\n| **MIG / Flux-Cored** | 40% @ 100A (4 min on, 6 off); 100% @ 75A | 25% @ 200A (2.5 min on, 7.5 off); 100% @ 115A |\n| **TIG** | 40% @ 125A (4 on, 6 off); 100% @ 90A | 30% @ 175A (3 on, 7 off); 100% @ 105A |\n| **Stick** | 40% @ 80A (4 on, 6 off); 100% @ 60A | 25% @ 175A (2.5 on, 7.5 off); 100% @ 100A |\n\nSources: Specifications (p.7), MIG/flux-cored (p.19), TIG and Stick (p.29).\n\n- **Lower current runs longer.** Below the 100% figure for your process and voltage, you can weld continuously.\n- **Overheating is handled for you.** The welder shuts down and shows a warning on the LCD, then restarts on its own once it cools (p.19).\n- **Keep the power switch on while it cools.** That lets the internal fan run.\n- **Park the torch safely.** Rest the gun, TIG torch or electrode holder on a non-conductive, heat-proof surface such as a concrete slab. Keep it well clear of the ground clamp.\n- **After a shutdown, weld in shorter bursts.** Use longer rests to reduce wear.\n\nWhich process and input voltage are you using? I can tell you what that means for the thickness of metal you'll be welding.\n",
+    "cost": 0.051768999999999996,
+    "turns": 5,
+    "passed": true,
+    "failures": [],
+    "unopened": []
+  }
+]
