@@ -121,3 +121,13 @@
 - So the planned prompt rule (a1) wasn't needed. Kept the prompt shorter; added this question to the eval set as a regression check.
 - Issues: cited p.14 and p.19 without opening them (F3); said 1/8 in is "near the upper end" for MIG, which contradicts the Selection Chart (MIG goes to 3/8 in).
 - Method note: my second run continued the same session, so it wasn't a clean before/after. Evals must start a fresh session per question.
+
+
+### F5: Server never started under `npm run dev` on Windows (Day 5-6)
+- Symptom: empty assistant bubble; Vite logged ECONNREFUSED for /api/chat; curl to :3001 returned 000. [server] output stopped at the script line; our code never ran. Running the server alone worked.
+- Attempt 1: drop `tsx watch` for `tsx` -> still failed.
+- Attempt 2: `node --import tsx` (no tsx CLI child process) -> still failed.
+- Fix: root `dev` runs binaries directly, no nested `npm run -w`:
+  `concurrently "node --import tsx server/src/server.ts" "vite web"`. Works on Windows and Linux.
+- Likely cause: nested npm workspace scripts under concurrently on Windows (not fully root-caused).
+- Enabled by paths resolved from import.meta.url, so the server runs from any working directory.

@@ -3,7 +3,7 @@
     "private": true,
     "workspaces": ["server", "web"],
     "scripts": {
-        "dev": "concurrently -k -n server,web -c blue,green \"npm run dev -w server\" \"npm run dev -w web\""
+            "dev": "concurrently -k -n server,web -c blue,green \"node --import tsx server/src/server.ts\" \"vite web\""
     },
     "devDependencies": {
         "concurrently": "^9.2.1"
