@@ -2,10 +2,11 @@
 import { config } from "dotenv";
 import { fileURLToPath } from "node:url";
 config({ path: fileURLToPath(new URL("../../.env", import.meta.url)) });
-import { markUnopenedCitations } from "./citations.js";
 
 import express from "express";
 import { ask } from "./agent.js";
+import { markUnopenedCitations } from "./citations.js";
+import { friendlyError } from "./errors.js";
 
 const app = express();
 const PORT = 3001;
@@ -24,7 +25,10 @@ app.get("/api/chat", async (req, res) => {
     Connection: "keep-alive",
   });
   const send = (event: object) => res.write(`data: ${JSON.stringify(event)}\n\n`);
+
   const opened = new Set<string>(); // pages the agent has read so far in this answer
+  let failed = false; // already reported an error to the browser
+
   try {
     for await (const msg of ask(question, session)) {
       if (msg.type === "assistant") {
@@ -44,13 +48,31 @@ app.get("/api/chat", async (req, res) => {
         }
       }
       if (msg.type === "result") {
+        // An API failure (bad key, no credits, overload) still ends with a result message, flagged is_error.
+        if (msg.is_error || msg.subtype !== "success") {
+          failed = true;
+          send({ type: "error", message: friendlyError(msg.subtype === "success" ? msg.result : msg.subtype) });
+        }
         send({ type: "done", session: msg.session_id, cost: msg.total_cost_usd });
       }
     }
   } catch (err) {
-    send({ type: "error", message: err instanceof Error ? err.message : String(err) });
+    const raw = err instanceof Error ? err.message : String(err);
+    console.error("[agent error]", raw);
+    if (!failed) send({ type: "error", message: friendlyError(raw) });
   }
   res.end();
 });
 
-app.listen(PORT, () => console.log(`agent server on http://localhost:${PORT}`));
+app.listen(PORT, (err?: Error) => {
+  // Express 5 passes listen errors here (e.g. the port is still held by an old server).
+  if (err) {
+    console.error(`\n❌ Could not start the agent server on port ${PORT}: ${err.message}`);
+    console.error("   Another copy is probably still running. Close it and run `npm run dev` again.\n");
+    process.exit(1);
+  }
+  console.log(`agent server on http://localhost:${PORT}`);
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.warn("\n⚠️  ANTHROPIC_API_KEY is not set. Copy .env.example to .env and add your key, then restart.\n");
+  }
+});

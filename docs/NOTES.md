@@ -149,3 +149,19 @@
   - Targeted x3: F3 raw 3/9, after guard 0/9.
   - Known limit: opened pages are tracked per answer, so a page read in an earlier turn of the same conversation gets "see" when cited again (errs on the safe side).
 - Ambiguity: "you may answer while asking" let the agent skip the question (1/3). Rewrote as a concrete action ("end with one short clarifying question") -> 3/3.
+
+
+### E13: Image-only questions (Day 7)
+- Added 6 cases for what the brief says exists only in images: weld diagnosis photos (MIG p.35, stick p.38), the wiring schematic (p.45: wire feeder motor -> CN4), wire feed parts location, front panel knobs, and the parts list.
+- x2 runs: 12/12 pass, every answer showed a figure, F3 raw 5/12 -> 0/12 after the guard. ~3 cents per question.
+- Limit: the eval can't prove the answer came from the image rather than the catalog summary (which Opus also wrote from the image). E2 already showed the model reads diagrams from images alone. Spot-checked answers by eye.
+
+
+- Reaffirmed with evidence (Day 7): the agent recovers from imperfect routing by opening more pages (porosity: 37, 43, then 13 and 42). Accuracy over cost: ~3 cents per question across 48 eval runs.
+
+
+
+### F8: Server "started" but wasn't listening (Day 7)
+- An old dev server still held ports 3001/5173. The new server logged "agent server on :3001" and exited with code 0, so the browser kept talking to the OLD server (old code, looked fine).
+- Cause: Express 5 passes listen errors to the callback; we ignored the argument.
+- Fix: check the error in the listen callback, print a clear message, exit(1) so concurrently stops the web app too.
