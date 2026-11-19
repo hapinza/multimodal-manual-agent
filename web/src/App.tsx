@@ -37,7 +37,7 @@ export default function App() {
     setMessages((prev) => [...prev.slice(0, -1), change(prev[prev.length - 1])])
   }
   function addPart(part: Part) {
-    updateLast((m) => ({ ...m, pages: [...m.pages, ...(event.input?.ids ?? [])] }))
+    updateLast((m) => ({ ...m, parts: [...m.parts, part] }))
   }
 
   function send(text: string = input) {
@@ -58,7 +58,7 @@ export default function App() {
     events.onmessage = (e) => {
       const event = JSON.parse(e.data)
       if (event.type === 'tool') {
-        updateLast((m) => ({ ...m, pages: [...m.pages, event.input.id] }))
+        updateLast((m) => ({ ...m, pages: [...m.pages, ...(event.input?.ids ?? [])] }))
       } else if (event.type === 'text') {
         addPart({ kind: 'text', text: event.text })
       } else if (event.type === 'image') {
