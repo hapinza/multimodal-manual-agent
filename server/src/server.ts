@@ -41,8 +41,10 @@ app.get("/api/chat", async (req, res) => {
               send({ type: "image", id: input.id, caption: input.caption });
             } else if (block.name === "mcp__manual__render_artifact") {
               send({ type: "artifact", title: input.title, html: input.html });
-            } else {
+            } else if (block.name === "mcp__manual__get_page") {
               send({ type: "tool", name: block.name, input });
+            } else {
+              console.log("[tool] ignored for the browser:", block.name);
             }
           }
         }
