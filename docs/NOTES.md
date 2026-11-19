@@ -165,3 +165,13 @@
 - An old dev server still held ports 3001/5173. The new server logged "agent server on :3001" and exited with code 0, so the browser kept talking to the OLD server (old code, looked fine).
 - Cause: Express 5 passes listen errors to the callback; we ignored the argument.
 - Fix: check the error in the listen callback, print a clear message, exit(1) so concurrently stops the web app too.
+
+
+### F10: UI silently broken since Day 6; evals never noticed (Day 9)
+- A one-line edit replaced the wrong line in App.tsx: addPart() stopped adding parts, and the tool handler still read the old input.id. The server streamed everything correctly (verified in DevTools EventStream), but the chat showed an empty bubble.
+- Evals call ask() directly and skip the UI, so all evals kept passing.
+- Found only by the clean-clone test. Lesson: evals cover the agent, not the product; also click through the UI after every change.
+
+### Final eval (Day 9)
+- 18 cases × 3: 52/54 passed, F3 raw 23/54, after guard 0/54, $1.82.
+- Raw F3 rate is unchanged (~43%): the prompt alone doesn't fix it; the guard does.
