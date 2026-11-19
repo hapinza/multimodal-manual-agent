@@ -8,7 +8,7 @@ const getPage = tool(
   "Fetch pages of the Vulcan OmniPro 220 documentation: each page's extracted text plus the page image. " +
     "Pass one or more page ids from the catalog (e.g. [\"manual-24\", \"quickstart-02\"]). " +
     "Open every page you plan to cite in one call. Call this before stating any machine-specific fact.",
-  { ids: z.array(z.enum(pageIds)).min(1).max(4) },
+  { ids: z.array(z.enum(pageIds)).min(1).max(4)},
   async ({ ids }) => ({
     content: (
       await Promise.all(

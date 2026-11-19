@@ -73,4 +73,46 @@
           "\\b\\d{2,3}\\s?(IPM|in/min|inches per minute)"
         ]
       }
+
+
+      ,
+      {
+        "id": "photo-mig-voltage-low",
+        "question": "Show me what a MIG bead looks like when the voltage is too low, and tell me what to change.",
+        "mustRead": ["manual-35"],
+        "mustContain": ["increase|raise|turn up"],
+        "mustShow": "image"
+      },
+      {
+        "id": "photo-stick-arc-too-long",
+        "question": "What does a stick weld look like when the arc length is too long? Show me, and how do I fix it?",
+        "mustRead": ["manual-38"],
+        "mustContain": ["shorten|decrease|closer|reduce"],
+        "mustShow": "image"
+      },
+      {
+        "id": "schematic-wire-feeder",
+        "question": "On the wiring schematic, which connector does the wire feeder motor plug into?",
+        "mustRead": ["manual-45"],
+        "mustContain": ["CN4"],
+        "mustShow": "any"
+      },
+      {
+        "id": "wire-feed-parts-location",
+        "question": "Where are the feed tensioner and the idler arm? Show me.",
+        "mustRead": ["manual-09|manual-14|manual-15"],
+        "mustShow": "image"
+      },
+      {
+        "id": "front-panel-knobs-mig",
+        "question": "When I'm MIG welding, what do the left and right knobs do?",
+        "mustRead": ["manual-20|manual-08"],
+        "mustContain": ["wire feed speed|wire speed", "voltage"]
+      },
+      {
+        "id": "parts-cooling-fan",
+        "question": "I need to order a replacement cooling fan. What's the part number?",
+        "mustRead": ["manual-46|manual-47"],
+        "mustContain": ["44|53"]
+      }
   ]

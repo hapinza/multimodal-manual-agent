@@ -1,0 +1,345 @@
+[
+  {
+    "id": "photo-mig-voltage-low",
+    "question": "Show me what a MIG bead looks like when the voltage is too low, and tell me what to change.",
+    "mustRead": [
+      "manual-35"
+    ],
+    "mustContain": [
+      "increase|raise|turn up"
+    ],
+    "mustShow": "image",
+    "read": [
+      "manual-35"
+    ],
+    "images": [
+      "manual-35"
+    ],
+    "captions": [
+      "Second bead from the left: \"Voltage Too Low or Wire Feed Too Slow\" and its correction."
+    ],
+    "artifacts": [],
+    "text": "Look at the second bead from the left in the \"Example Wire Weld Diagrams\" row on the page above (p.35).\n\n**What a too-low-voltage bead looks like (p.35):**\n- It's narrow and ropey, and it sits on top of the metal like a raised ridge.\n- In the cross-section, the bead is a rounded lump on the surface. It doesn't blend into the plate the way the good weld does, so penetration is shallow.\n- The top view shows a thin, uneven bead. The good weld, by comparison, is wide with evenly stacked ripples.\n\nThe manual groups this with \"wire feed too slow.\" Both give the same look.\n\n**What to change (p.35):** do either of these.\n- Increase the output voltage (right knob), or\n- Increase the wire feed speed (left knob).\n\nChange one setting at a time and make a short test bead on scrap after each change. The manual says to practice on scrap whenever you change material, thickness, or process (p.18).\n\nIf the bead is still cold and lumpy after that, the same page lists more ways to add heat:\n- Travel more slowly.\n- Use a shorter CTWD (contact tip to work distance).\n- Increase the weld current.\n\nWhat wire and material are you using, and how thick is it? I can point you to the recommended starting settings.\n",
+    "cost": 0.0862926,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [
+      "manual-18"
+    ],
+    "afterGuard": []
+  },
+  {
+    "id": "photo-mig-voltage-low",
+    "question": "Show me what a MIG bead looks like when the voltage is too low, and tell me what to change.",
+    "mustRead": [
+      "manual-35"
+    ],
+    "mustContain": [
+      "increase|raise|turn up"
+    ],
+    "mustShow": "image",
+    "read": [
+      "manual-35"
+    ],
+    "images": [
+      "manual-35"
+    ],
+    "captions": [
+      "Second bead from the left: \"Voltage Too Low or Wire Feed Too Slow\", with its correction."
+    ],
+    "artifacts": [],
+    "text": "The bead for low voltage is the second one from the left in the \"Example Wire Weld Diagrams\" row on the page above (p.35).\n\n**What it looks like**\n- It's a narrow, tall, rope-like bead that sits on top of the metal.\n- In the cross-section it's rounded and lumpy, with little blending into the base metal. That means weak penetration.\n- Compared with the \"Good Weld\" bead, it's narrower and more ridged.\n\n**What to change (p.35)**\nThe manual gives two options:\n1. **Increase output voltage**, or\n2. **Increase wire feed speed**\n\nThe manual lists \"voltage too low\" and \"wire feed too slow\" as one defect, so a voltage-to-wire-speed mismatch can cause it. Change one setting at a time in small steps. Then run a short bead on scrap and compare it to the good-weld picture.\n\n**If the bead is still cold or has too little penetration**\nThese general heat adjustments also apply (p.35):\n- Slow your travel speed.\n- Use a shorter CTWD, the contact tip to work distance. Keep it under 1/2\".\n- Increase weld current.\n\nOn this welder, the Right Knob adjusts voltage and the Left Knob adjusts wire feed speed on the Auto Weld screen (p.20).\n\nAre you welding solid-wire MIG or flux-cored, and what thickness of metal? I can then point you to a starting range.\n",
+    "cost": 0.0243385,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [
+      "manual-20"
+    ],
+    "afterGuard": []
+  },
+  {
+    "id": "photo-stick-arc-too-long",
+    "question": "What does a stick weld look like when the arc length is too long? Show me, and how do I fix it?",
+    "mustRead": [
+      "manual-38"
+    ],
+    "mustContain": [
+      "shorten|decrease|closer|reduce"
+    ],
+    "mustShow": "image",
+    "read": [
+      "manual-38"
+    ],
+    "images": [
+      "manual-38"
+    ],
+    "captions": [
+      "Rightmost column: \"Arc Length Too Long\" bead photo, cross-section, and correction arrow."
+    ],
+    "artifacts": [],
+    "text": "The page above shows the \"Arc Length Too Long\" example in the rightmost column (p.38).\n\n**What it looks like**\n- **Top view:** The bead is ragged and lumpy. It has uneven blobs with dark, dirty-looking gaps along the edges, instead of the smooth, evenly rippled bead of the \"Good Weld\" column.\n- **Cross-section:** The bead sits on top of the plate as a rounded hump. It doesn't sink into the metal the way the good weld does, so penetration is poor.\n- **Before cleaning:** Stick welds are covered in slag until you chip it off, so clean the weld before you judge it (p.38).\n\n**How to fix it**\n- **Decrease the distance.** Lower the electrode toward the work. The diagram shows a downward arrow (p.38).\n- **Target arc length:** Hold an arc length about equal to the electrode diameter (see p.33).\n- **If you overcorrect:** An arc that's too short gives a narrow, flat bead. For that, the manual says to increase the distance (p.38).\n\nAre you using a particular electrode type and diameter? I can help with amperage settings and the other bead defects if you tell me.\n",
+    "cost": 0.0244103,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "photo-stick-arc-too-long",
+    "question": "What does a stick weld look like when the arc length is too long? Show me, and how do I fix it?",
+    "mustRead": [
+      "manual-38"
+    ],
+    "mustContain": [
+      "shorten|decrease|closer|reduce"
+    ],
+    "mustShow": "image",
+    "read": [
+      "manual-38"
+    ],
+    "images": [
+      "manual-38"
+    ],
+    "captions": [
+      "Rightmost column: \"Arc Length Too Long\" bead photo, cross-section, and correction arrow."
+    ],
+    "artifacts": [],
+    "text": "The rightmost column on the page above is \"Arc Length Too Long\" (p.38).\n\n**What it looks like**\n- **Top view:** The bead is ragged and lumpy, with an uneven, blotchy surface. It isn't the smooth, evenly rippled line of the good weld on the far left.\n- **Cross-section:** The bead sits on top of the plate as a dome. It doesn't dig into the metal the way the good weld does, so penetration is shallow.\n- **Slag:** Stick welds are covered in slag until you clean them, so chip and brush the weld before you judge it (p.38).\n\n**How to fix it**\n- **Decrease the distance.** Lower the electrode toward the work. The diagram shows a downward arrow on the electrode (p.38).\n- **Target arc length:** Hold an arc length about equal to the electrode's diameter, for example about 3/32\" for a 3/32\" rod (see p.33).\n- **Feed the rod down as it burns.** The electrode gets shorter as you weld, so keep pushing it toward the plate to hold the gap steady.\n\nDon't overcorrect. If the rod is too close (arc length too short), the bead comes out narrow and the rod tends to stick. The page's fix for that is to increase the distance (p.38).\n\nAre you running 120V or 240V, and what rod size and plate thickness? I can suggest a starting amperage.\n",
+    "cost": 0.0239491,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "schematic-wire-feeder",
+    "question": "On the wiring schematic, which connector does the wire feeder motor plug into?",
+    "mustRead": [
+      "manual-45"
+    ],
+    "mustContain": [
+      "CN4"
+    ],
+    "mustShow": "any",
+    "read": [
+      "manual-45"
+    ],
+    "images": [
+      "manual-45"
+    ],
+    "captions": [
+      "Wiring schematic: find the wire feeder motor \"M\" and its CN4 connector"
+    ],
+    "artifacts": [],
+    "text": "The wire feeder motor (the box labeled \"WIRE FEEDER / M\") plugs into **CN4**, a 5-pin connector (p.45). In the diagram above, it's on the right side, just below the two solenoid valves.\n\nDon't confuse it with the other nearby connectors:\n- **CN3** (4-pin) feeds the two solenoid valves.\n- **CN6** (2-pin) goes to the fast wire feed switch, which is the Cold Wire Feed Switch.\n- **CN7** (3-pin) goes to the remote board, which has the two aviation plugs.\n\nAre you tracing a wire feed problem? If the motor runs but the wire doesn't feed, the manual's troubleshooting table points to mechanical causes first. Those are tension, roller groove and gun cable insertion. I can walk you through them.\n",
+    "cost": 0.0206237,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "schematic-wire-feeder",
+    "question": "On the wiring schematic, which connector does the wire feeder motor plug into?",
+    "mustRead": [
+      "manual-45"
+    ],
+    "mustContain": [
+      "CN4"
+    ],
+    "mustShow": "any",
+    "read": [
+      "manual-45"
+    ],
+    "images": [
+      "manual-45"
+    ],
+    "captions": [
+      "Wiring schematic: find the wire feeder motor \"M\" and its CN4 connector."
+    ],
+    "artifacts": [],
+    "text": "The wire feeder motor (the box labeled **WIRE FEEDER / M**) plugs into **CN4**, a 5-pin connector (p.45). You'll find it on the right side of the schematic, just above the CN7 connector that goes to the remote board.\n\nHere are the nearby connectors, so you don't mix them up:\n- **CN3** (4-pin) goes to the two solenoid valves, which control the gas.\n- **CN6** (2-pin) goes to the fast wire feed switch. This is the Cold Wire Feed switch.\n- **CN7** (3-pin) goes to the remote board and its aviation plugs.\n\nThe schematic is printed rotated. Turn the page sideways to read the labels easily.\n",
+    "cost": 0.0191722,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "wire-feed-parts-location",
+    "question": "Where are the feed tensioner and the idler arm? Show me.",
+    "mustRead": [
+      "manual-09|manual-14|manual-15"
+    ],
+    "mustShow": "image",
+    "read": [
+      "manual-09",
+      "manual-11"
+    ],
+    "images": [
+      "manual-09"
+    ],
+    "captions": [
+      "Interior view: Feed Tensioner and Idler Arm labels on the right, at the wire feed mechanism."
+    ],
+    "artifacts": [],
+    "text": "Both parts are in the wire feed mechanism, which is inside the side door compartment. In the diagram above, they're on the right side of the compartment (p.9).\n\n- **Feed Tensioner:** This is the ribbed knob at the top of the wire feed mechanism. It's a spring-loaded knob that sets how hard the idler arm presses the wire against the feed roller.\n- **Idler Arm:** This is the small hinged arm with the VULCAN logo, just below the tensioner. It sits over the feed roller and clamps the wire against it.\n\n**How they work together (p.11):**\n- Turn the tensioner counterclockwise and pull it down. This releases the tension, and the spring-loaded idler arm swings up.\n- To lock the wire in, rest it in the roller groove and push the idler arm down. Then swing the tensioner back up to latch across the arm (p.15).\n\n**Tension settings (p.15):**\n- Solid wire: 3–5.\n- Flux-cored wire: 2–3. Too much tension crushes flux-cored wire.\n\nUnplug the welder before you reach in to load wire.\n\nAre you loading a spool for flux-cored or solid MIG wire? I can walk you through the threading steps for whichever you're using.\n",
+    "cost": 0.033127199999999996,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [
+      "manual-15"
+    ],
+    "afterGuard": []
+  },
+  {
+    "id": "wire-feed-parts-location",
+    "question": "Where are the feed tensioner and the idler arm? Show me.",
+    "mustRead": [
+      "manual-09|manual-14|manual-15"
+    ],
+    "mustShow": "image",
+    "read": [
+      "manual-09",
+      "manual-11"
+    ],
+    "images": [
+      "manual-09",
+      "manual-11"
+    ],
+    "captions": [
+      "Feed Tensioner and Idler Arm are labeled on the right, on the wire feed mechanism.",
+      "Bottom right: tensioner knob pulled down, then the Idler Arm springs up."
+    ],
+    "artifacts": [],
+    "text": "Both parts are inside the side wire compartment. Open the side door to reach them. They're on the wire feed mechanism, the boxy assembly on the right side of the compartment (p.9).\n\n- **Feed Tensioner:** the ribbed knob on top of the wire feed mechanism. It's the spring-loaded knob that clamps the idler arm down.\n- **Idler Arm:** the hinged arm under the tensioner, with the \"VULCAN\" logo on it. It presses the wire against the drive roller. The Feed Roller Knob sits just below it.\n\n**How they work together (p.11):**\n1. Turn the Feed Tensioner knob counterclockwise to loosen it, then pull it down. That releases the tension.\n2. The spring-loaded Idler Arm then swings up, as in the bottom-right diagram on p.11. This opens the roller so you can load or remove wire.\n3. After you thread the wire, push the Idler Arm back down and swing the tensioner up to latch it (p.15).\n\nUnplug the welder before you reach in to load wire.\n\nAre you loading a new spool? If so, I can walk you through the tension settings next.\n",
+    "cost": 0.0332277,
+    "turns": 4,
+    "passed": true,
+    "failures": [],
+    "unopened": [
+      "manual-15"
+    ],
+    "afterGuard": []
+  },
+  {
+    "id": "front-panel-knobs-mig",
+    "question": "When I'm MIG welding, what do the left and right knobs do?",
+    "mustRead": [
+      "manual-20|manual-08"
+    ],
+    "mustContain": [
+      "wire feed speed|wire speed",
+      "voltage"
+    ],
+    "read": [
+      "manual-20"
+    ],
+    "images": [
+      "manual-20"
+    ],
+    "captions": [
+      "Left/Right knob labels on the panel, plus the Diameter/Thickness and Auto Weld screens."
+    ],
+    "artifacts": [],
+    "text": "In MIG mode the two knobs do different jobs depending on which screen you're on (p.20). The Main Control Knob in the center moves you between screens.\n\n**Wire diameter and thickness screen**\n- **Left knob:** sets the wire diameter, for example .025\".\n- **Right knob:** sets the material thickness, for example 24Ga.\n\n**Auto Weld screen**\n- **Left knob:** adjusts wire feed speed, which also sets amperage. The example screen shows 121 in/min.\n- **Right knob:** adjusts voltage. The example screen shows 13.8 V.\n\nOnce you've entered wire diameter and thickness, the welder suggests starting settings. If you change wire speed or voltage by hand, a white mark on each line shows the recommended value for your wire and thickness. You can use that mark as your starting point and adjust from there.\n\nThe diagram above shows the knob positions and both screens.\n\nAre you running solid wire with gas or flux-cored? The polarity setup differs between the two, and I can walk you through it.\n",
+    "cost": 0.024476000000000005,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "front-panel-knobs-mig",
+    "question": "When I'm MIG welding, what do the left and right knobs do?",
+    "mustRead": [
+      "manual-20|manual-08"
+    ],
+    "mustContain": [
+      "wire feed speed|wire speed",
+      "voltage"
+    ],
+    "read": [
+      "manual-20"
+    ],
+    "images": [
+      "manual-20"
+    ],
+    "captions": [
+      "Left, Main Control, and Right knobs, plus the wire size/thickness and Auto Weld screens."
+    ],
+    "artifacts": [],
+    "text": "In MIG mode, what the left and right knobs do depends on which screen you're on (p.20).\n\n**Wire diameter and thickness screen**\n- **Left knob:** sets the wire diameter, for example .025\".\n- **Right knob:** sets the material thickness, for example 24Ga.\n\n**Auto Weld screen (the main welding screen)**\n- **Left knob:** adjusts wire feed speed, which also sets the amperage. The example shows 121 in/min.\n- **Right knob:** adjusts voltage. The example shows 13.8 V.\n\nIf you change wire feed speed or voltage by hand, a white mark on each line shows the recommended setting for your wire diameter and material thickness (p.20). Once you've entered those two values, the machine suggests starting settings. You can then adjust from there.\n\nThe large center knob is the Main Control Knob. You turn it to scroll through processes and menus. You press it to select or go to the next screen. The Back button returns you to the previous screen (p.20).\n\nAre you running solid wire with gas, or flux-cored? The polarity and a few settings differ between the two.\n",
+    "cost": 0.0236208,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  },
+  {
+    "id": "parts-cooling-fan",
+    "question": "I need to order a replacement cooling fan. What's the part number?",
+    "mustRead": [
+      "manual-46|manual-47"
+    ],
+    "mustContain": [
+      "44|53"
+    ],
+    "read": [
+      "manual-46"
+    ],
+    "images": [
+      "manual-47"
+    ],
+    "captions": [
+      "Exploded view: find callouts 44 and 53 (the two fans) inside the housing."
+    ],
+    "artifacts": [],
+    "text": "The manual doesn't give a stock or SKU-style part number for the fan. It only gives reference numbers in the parts list (p.46). This welder has two fans:\n\n- **Part 44, Fan (qty 1).** It sits in the internal chassis area with the heat sinks and transformer.\n- **Part 53, Fan (qty 1).** It's on the rear-panel side.\n\nThe list doesn't say how the two differ, such as size or which one cools what. Use the exploded diagram above (p.47) to find which fan is the one you need. The wiring schematic also shows two fans (FAN and FAN2), so the machine has two.\n\n**To order:**\n- Call Harbor Freight at **1-800-444-3353**. That's the parts line.\n- Give them the item number **57812**. Tell them which fan you need, 44 or 53, by its position.\n- Give them the **UPC 193175422590**. The manual says to specify it when ordering parts (p.46).\n- Have your **date code** ready. It's recorded in the back of the manual, or use your purchase month and year if there isn't one (p.46).\n\n**Two caveats from the manual (p.46):**\n- Some listed parts are for illustration only and can't be bought individually. Parts may also not be interchangeable. Ask whether the fan is sold separately.\n- The manufacturer says repairs and part replacements should be done by certified technicians. The fans are inside the case, so unplug the welder first. This is also a warranty issue. The warranty is 90 days and excludes outside repairs.\n\nIs the fan not running, or is it making noise? If you tell me which, I can help work out whether it's the fan itself.\n",
+    "cost": 0.0282764,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [
+      "manual-47"
+    ],
+    "afterGuard": []
+  },
+  {
+    "id": "parts-cooling-fan",
+    "question": "I need to order a replacement cooling fan. What's the part number?",
+    "mustRead": [
+      "manual-46|manual-47"
+    ],
+    "mustContain": [
+      "44|53"
+    ],
+    "read": [
+      "manual-46",
+      "manual-47"
+    ],
+    "images": [
+      "manual-47"
+    ],
+    "captions": [
+      "Fans are callouts 44 (inside, near the power board) and 53 (rear panel, behind the grille)."
+    ],
+    "artifacts": [],
+    "text": "The manual doesn't give a stock or SKU number for the fan. It only gives reference numbers, and the machine has two fans (p.46):\n\n- **Part 44: Fan**, qty 1. In the diagram this is the fan inside the chassis, near the power board and heatsinks (p.47).\n- **Part 53: Fan**, qty 1. This is the fan at the rear panel, behind the grille (p.47).\n\nBoth fans are listed as just \"Fan,\" with no size or description to tell them apart. Look at the diagram above to see which one is yours.\n\n**To order:**\n- Call Harbor Freight at **1-800-444-3353**. The parts note (p.46) says to specify **UPC 193175422590** when ordering parts.\n- Have the Item number (**57812**), the part reference (**44** or **53**), and your product date code ready. The date code is the one you write on p.46.\n- The manual says some parts are shown for illustration only and aren't sold individually, and parts may not be interchangeable (p.46). Ask whether the fan is available on its own.\n- The manufacturer recommends that a certified technician do replacements (p.46). The unit also has to be unplugged first.\n\nWhich fan is failing, the rear one or the internal one? If you describe the symptoms, I can check the troubleshooting pages. The machine may also be thermally shut down rather than having a bad fan (see p.19).\n",
+    "cost": 0.0348098,
+    "turns": 3,
+    "passed": true,
+    "failures": [],
+    "unopened": [],
+    "afterGuard": []
+  }
+]
