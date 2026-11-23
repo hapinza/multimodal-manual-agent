@@ -2,8 +2,6 @@
 
 A multimodal support agent for the **Vulcan OmniPro 220** welder, built on the **Claude Agent SDK**. Ask it a setup or troubleshooting question and it reads the relevant manual pages (text *and* images), answers with page citations, shows the manual's own diagrams, and draws what words can't: socket hookup diagrams, a duty cycle calculator, troubleshooting flowcharts.
 
-> **Video walkthrough:** [TODO: link]
-
 ![Answer with a manual diagram](docs/screenshots/tig-polarity.png)
 
 | Interactive duty cycle calculator | Process selection from an image-only chart |
