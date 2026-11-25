@@ -2,6 +2,8 @@
 
 A multimodal support agent for the **Vulcan OmniPro 220** welder, built on the **Claude Agent SDK**. Ask it a setup or troubleshooting question and it reads the relevant manual pages (text *and* images), answers with page citations, shows the manual's own diagrams, and draws what words can't: socket hookup diagrams, a duty cycle calculator, troubleshooting flowcharts.
 
+**Stack:** TypeScript · Claude Agent SDK · Express (SSE) · React · Python (offline extraction) · built with Claude Code
+
 ![Answer with a manual diagram](docs/screenshots/tig-polarity.png)
 
 | Interactive duty cycle calculator | Process selection from an image-only chart |
@@ -115,9 +117,9 @@ Cost: building the catalog for all 51 pages took about $1, once. Answering a que
 
 ## Design decisions
 
-- **Runtime in TypeScript, extraction in Python.** Evaluators run only the Node app (`npm install` + `npm run dev`). Extraction runs once, uses PyMuPDF, and its outputs are committed.
+- **Runtime in TypeScript, extraction in Python.** Running the app needs only Node (`npm install` + `npm run dev`). PDF tooling is strongest in Python, so extraction uses PyMuPDF, runs once, and its outputs are committed.
 - **The Agent SDK is locked down.** Built-in tools are disabled (`tools: []`), local Claude settings are ignored (`settingSources: []`), and `maxTurns` is capped. This agent sits behind a web UI and should only ever read the manual.
-- **Rules come from evidence.** Every rule in the system prompt traces back to a requirement in the brief or a failure I observed: read before you state a machine-specific fact, cite pages, ask when the question is ambiguous, never invent specs, show figures instead of describing them.
+- **Rules come from evidence.** Every rule in the system prompt traces back to a product requirement or a failure I observed: read before you state a machine-specific fact, cite pages, ask when the question is ambiguous, never invent specs, show figures instead of describing them.
 - **Prompts ask, code enforces.** Where it matters, behavior is enforced in code, not just requested: zod schemas validate every tool input (page ids must exist, captions are capped at 140 characters), artifacts are sandboxed, and citations are checked before they reach the user (see Evals).
 - **Artifacts are untrusted code.** The model writes HTML, and the browser runs it in an `<iframe sandbox="allow-scripts">` **without** `allow-same-origin`, plus a Content-Security-Policy that blocks all network access. The iframe reports its height through `postMessage`, and the parent only accepts a number from that specific iframe.
 - **Generated artifacts vs. prebuilt widgets.** I let the model write the HTML so it can draw anything (a hookup diagram for *your* process, a flowchart for *your* defect). The trade-off is variance between runs; prebuilt components fed by structured data would be more consistent but limited to what I built.
@@ -159,7 +161,7 @@ Results are saved to `server/evals/results/` so every change can be compared wit
 
 | | Result |
 |---|---|
-| Cases | 18 (README examples, ambiguous question, image-only info, artifacts, safety, invented-numbers trap) |
+| Cases | 18 (the example questions above, ambiguous question, image-only info, artifacts, safety, invented-numbers trap) |
 | Pass rate | 52/54 |
 | Invented numbers | 0 |
 | User's wrong assumption corrected | 3/3 |
@@ -174,7 +176,7 @@ The two failures were one-off misses; each of those cases passed its other two r
 ## Project structure
 
 ```
-files/                  original PDFs (from the challenge)
+files/                  source PDFs: owner's manual, quick start guide, selection chart
 extraction/             offline build (Python): render pages, extract text, build catalog
 knowledge/              committed outputs: pages/*.png, page_text.json, catalog.json
 server/src/
